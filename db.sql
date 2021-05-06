@@ -3,8 +3,12 @@ CREATE DATABASE Locadora;
 USE Locadora;
 
 CREATE TABLE marca_carros VALUES(id int PRIMARY KEY NOT NULL AUTO_INCREMENT, nomes varchar(30));
+,
 
-CREATE TABLE automoveis VALUES(id_auto int PRIMARY KEY NOT NULL AUTO_INCREMENT, nomes varchar(30));
+CREATE TABLE automoveis VALUES(id_auto int PRIMARY KEY NOT NULL AUTO_INCREMENT, modelo varchar(30), modelo varchar(20), cor varchar(20), placa varchar(20), ano INT, km INT, dadaEntrada DATA, dataSaida DATA, valor INT), fk_marca_carros int);
+
+CREATE TABLE cliente VALUES(id_clientes int PRIMARY KEY NOT NULL AUTO_INCREMENT, nomes varchar(30), telefone varchar(20), habilitacao varchar(2), 
+marca varchar(20), modelo varchar(20), cor varchar(20), placa varchar(20), ano INT, km INT, dadaEntrada DATA, dataSaida DATA, valor INT);
 
 
 ALTER TABLE automoveis
