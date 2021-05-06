@@ -14,7 +14,7 @@
     <!-- Link CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body>        
    <div class="container">
        <div class="text-center">
        <img src="images/logo.png" class="img-fluid" alt="Responsive image">
@@ -61,28 +61,7 @@
             <div class="form-group col-md-4">
                 <label for="marca">MODELO</label>
                 <select id="modelo" class="form-control" name="select_modelo">
-                    
-                    <?php
-                            if($POST['select_marca'] == ''){
-                                echo "<option selected>Escolha...</option>";
-                            }else{
-                                $result_modelos = "SELECT id_auto, modelo FROM automoveis";
-                                $resultado_modelos = mysqli_query($conexao, $result_modelos);
-                      
-                                while ($row_modelos = mysqli_fetch_assoc($resultado_modelos)){ ?>:                            
-                                    <option value="<?php $row_modelos['id_auto']; ?>"><?php echo $row_modelos['modelo']; ?>
-                                    
-                                    </option><?php 
-                                            
-                                    }
-                            }
-                            
-                                
-                           
-                             
-                        
-                    ?>                    
-                       
+                   
                 </select>
             </div>
             <div class="form-group col-md-2">
