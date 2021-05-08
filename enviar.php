@@ -1,12 +1,13 @@
-<?php
+<?php include "conexao.php";
 
 if(isset($_POST['nome']) && $_POST['nome'] != ''){
     $cadastro = [];
 
+    
     $cadastro['nome'] = $_POST['nome'];
 
-    if(isset($_POST['tel'])){
-        $cadastro['tel'] = $_POST['tel'];
+    if(isset($_POST['telefone'])){
+        $cadastro['telelefone'] = $_POST['telelefone'];
     }else{
         $cadastro['tel'] = '';
     }
@@ -18,11 +19,6 @@ if(isset($_POST['nome']) && $_POST['nome'] != ''){
     }
     
 }
-
-$cadastro ['']
- include "index.php";
- include "conexao.php";
-
 
 //INSERINDO DADOS NA TABELA CLIENTE
 if(isset($cadastro)){
