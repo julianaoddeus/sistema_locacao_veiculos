@@ -75,12 +75,7 @@
                 <span class="carregando">Carredando...</span>
                 <select id="modelo" class="form-control" name="modelo">
                     <option selected>Escolha...</option>
-                        <?php
-                            $result_modelos = "SELECT * FROM automoveis ORDER BY modelo";
-                            $resultado = mysqli_query($conexao, $result_modelos); 
-                            if($row_marcas['id_marca'] == )
-                            
-                        ?>
+                       
                 </select>
             </div>
             <div class="form-group col-md-2">
