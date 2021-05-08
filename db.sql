@@ -21,7 +21,7 @@ CREATE TABLE `cliente` (
   `km` INT NOT NULL,
   `dataEntrada` DATA NOT NULL,
   `dataSaida` DATA NOT NULL,
-  `fk_cadastro` INT NOT NULL,
+  `fk_cadastro` INT NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `automoveis` (
   `km` INT NOT NULL,
   `dataEntrada` DATA NOT NULL,
   `dataSaida` DATA NOT NULL,
-  `fk_marca_carros` INT NOT NULL,
+  `fk_marca_carros` INT NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -46,11 +46,16 @@ CREATE TABLE `automoveis` (
 --
 CREATE TABLE `marca_carros` (
   `id_marca` INT PRIMARY KEY NOT NULL,
-  `nome` varchar(20) NOT NULL,
+  `nome` varchar(20) NOT NULL
   
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 --
---
+-- Inserindo dados da tabela `marca_carros`
+INSERT INTO 'marca_carros' (`id_marca`, `nomes`) VALUES (NUll, 'FIAT');
+INSERT INTO 'marca_carros' (`id_marca`, `nomes`) VALUES (NUll, 'FORD');
+INSERT INTO 'marca_carros' (`id_marca`, `nomes`) VALUES (NUll, 'GM');
+INSERT INTO 'marca_carros' (`id_marca`, `nomes`) VALUES (NUll, 'VW');
+
 -- Inserindo dados da tabela `automoveis`
 --
 INSERT INTO `automoveis` (`id_auto`, `modelo`, `cor`, `ano`, `km_atual`, `placa`,`valor`, `fk_marca_carros`) VALUES (NULL, 'UNO', 'BRANCO', '2015', '56023', 'QWE-8956', 89.9, '1');

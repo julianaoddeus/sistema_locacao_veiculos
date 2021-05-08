@@ -11,15 +11,27 @@
     <!-- Link Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <!-- Link CSS -->
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <!-- CSS -->
+    <style type="text/css">
+        .container {
+            background-color: #222;
+            color: #fff;
+        }
+
+        .carregando {
+            color: #ff0000;
+            display: none;
+        }
+
+    </style>
+
+  </head>
 <body>        
    <div class="container">
        <div class="text-center">
        <img src="images/logo.png" class="img-fluid" alt="Responsive image">
        </div>
-    <form action="enviar.php" method="post">
+    <form action="enviar.php" method="POST">
         <!-- Informações do Cliente -->
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -43,29 +55,36 @@
         <!-- Informações do Veículo -->
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="marca">MARCA</label>
-                <select class="form-control" name="select_marca">
-                    <option selected>Escolha...</option>                   
+                <label >MARCA</label>
+                <select id="marca" class="form-control" name="marca">
+                    <option selected>Escolha...</option>      
+                    <!-- Traz a opção de carros que está no Banco de dados Locadora -->
                     <?php
-                        $result_marcas = "SELECT * FROM marca_carros";
-                        $resultado_marcas = mysqli_query($conexao, $result_marcas);
-                        
-                        while ($row_marcas = mysqli_fetch_assoc($resultado_marcas)){ ?>:
-                            <option value="<?php /*echo $row_marcas['id_marcas']; id do db*/?>"><?php echo $row_marcas['nomes']; ?>
-                            </option><?php 
-                        }                  
+                        $result_marcas = "SELECT * FROM marca_carros ORDER BY nomes";
+                        $resultado_marcas = mysqli_query($conexao, $result_marcas);                       
+
+                        while($row_marcas = mysqli_fetch_assoc($resultado_marcas) ) {
+                            echo '<option value="'.$row_marcas['id_marca'].'">'.$row_marcas['nomes'].'</option>';
+                        }          
                     
                     ?>                    
                 </select>
             </div>
             <div class="form-group col-md-4">
-                <label for="marca">MODELO</label>
-                <select id="modelo" class="form-control" name="select_modelo">
-                   
+                <label>MODELO</label>
+                <span class="carregando">Carredando...</span>
+                <select id="modelo" class="form-control" name="modelo">
+                    <option selected>Escolha...</option>
+                        <?php
+                            $result_modelos = "SELECT * FROM automoveis ORDER BY modelo";
+                            $resultado = mysqli_query($conexao, $result_modelos); 
+                            if($row_marcas['id_marca'] == )
+                            
+                        ?>
                 </select>
             </div>
             <div class="form-group col-md-2">
-                <label for="marca">COR</label>
+                <label>COR</label>
                 <select id="cor" class="form-control" name="cor">
                     <option selected>Escolha...</option>
                     <option>...</option>
@@ -105,12 +124,31 @@
         <button type="submit" class="btn btn-secondary float-right">RESERVAR</button>
         <br><br>
     </form>
-
-   
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        $(function(){
+			$('#marca').change(function(){
+				if( $(this).val() ) {
+					$('#modelo').hide();
+					$('.carregando').show();
+					$.getJSON('modelos.php?search=',{marca: $(this).val(), ajax: 'true'}, function(j){
+						let options = '<option value="">Escolha...</option>';	
+						for (var i = 0; i < j.length; i++) {
+							options += '<option value="' + j[i].id_marca + '">' + j[i].modelo + '</option>';
+						}	
+						$('#modelo').html(options).show();
+						$('.carregando').hide();
+					});
+				} else {
+					$('#modelo').html('<option value=""> - Escolha o modelo - </option>');
+				}
+			});
+		});
+    </script>
 </body>
 </html>

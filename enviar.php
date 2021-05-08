@@ -18,6 +18,8 @@ if(isset($_POST['nome']) && $_POST['nome'] != ''){
     }
     
 }
+
+$cadastro ['']
  include "index.php";
  include "conexao.php";
 
