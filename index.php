@@ -31,7 +31,7 @@
        <div class="text-center">
        <img src="images/logo.png" class="img-fluid" alt="Responsive image">
        </div>
-    <form action="enviar.php" method="POST">
+    <form action="cliente.php" method="POST">
         <!-- Informações do Cliente -->
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -45,7 +45,7 @@
             <div class="form-group col-md-2">
                 <label for="cliente">HABILITAÇÃO</label>
                 <select id="cor" class="form-control" name="habilitacaoCliente">
-                        <option selected>Escolha...</option>
+                        <option selected>Categoria</option>
                         <option>A</option>
                         <option>B</option>
                         <option>AB</option>
@@ -60,11 +60,11 @@
                     <option selected>Escolha...</option>      
                     <!-- Traz a opção de carros que está no Banco de dados Locadora -->
                     <?php
-                        $result_marcas = "SELECT * FROM marca_carros ORDER BY nomes";
+                        $result_marcas = "SELECT DISTINCT marca FROM descricao_veiculo";
                         $resultado_marcas = mysqli_query($conexao, $result_marcas);                       
 
                         while($row_marcas = mysqli_fetch_assoc($resultado_marcas) ) {
-                            echo '<option value="'.$row_marcas['id_marca'].'">'.$row_marcas['nomes'].'</option>';
+                            echo '<option value="'.$row_marcas['id'].'">'.$row_marcas['marca'].'</option>';
                         }          
                     
                     ?>                    
@@ -73,17 +73,17 @@
             <div class="form-group col-md-4">
                 <label>MODELO</label>
                 <span class="carregando">Carredando...</span>
+                <span class="carregando">Carredando...</span>
                 <select id="modelo" class="form-control" name="modelo">
                     <option selected>Escolha...</option>
-                       
+                   
+                  
                 </select>
             </div>
+
             <div class="form-group col-md-2">
                 <label>COR</label>
-                <select id="cor" class="form-control" name="cor">
-                    <option selected>Escolha...</option>
-                    <option>...</option>
-                </select>
+                <input type="text" class="form-control" id="cor" name="cor">              
             </div>
         </div> 
         <div class="form-row">
@@ -95,9 +95,13 @@
                 <label for="carro">ANO</label>
                 <input type="text" class="form-control" id="ano" name="ano">
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
                 <label for="carro">KM ATUAL</label>
                 <input type="text" class="form-control" id="km" name="km">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="reserva">VALOR</label>
+                <input type="text" class="form-control" id="valor" placeholder="R$" name="valor">
             </div>
             
         </div>
@@ -111,39 +115,32 @@
                 <label for="reserva">DATA DA SAÍDA</label>
                 <input type="date" name="dataS" id="dataS" class="form-control">
             </div>
-            <div class="form-group col-md-4">
-                <label for="reserva">VALOR</label>
-                <input type="text" class="form-control" id="valor" placeholder="R$" name="valor">
-            </div>
+            
         </div>
         <button type="submit" class="btn btn-secondary float-right">RESERVAR</button>
         <br><br>
     </form>
+
+    <script type='text/javascript'>
+			/*
+				$("select[name='modelo']").change(function(){
+					let $cor = $("input[name='cor']");
+					let $placa = $("input[name='placa']");
+					$.getJSON('function.php',{ 
+						modelo: $( this ).val() 
+					},function( json ){
+						$cor.val( json.cor );
+						$placa.val( json.placa );
+					});
+				});
+		*/
+		</script>
     
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script>
-        $(function(){
-			$('#marca').change(function(){
-				if( $(this).val() ) {
-					$('#modelo').hide();
-					$('.carregando').show();
-					$.getJSON('modelos.php?search=',{marca: $(this).val(), ajax: 'true'}, function(j){
-						let options = '<option value="">Escolha...</option>';	
-						for (var i = 0; i < j.length; i++) {
-							options += '<option value="' + j[i].id_marca + '">' + j[i].modelo + '</option>';
-						}	
-						$('#modelo').html(options).show();
-						$('.carregando').hide();
-					});
-				} else {
-					$('#modelo').html('<option value=""> - Escolha o modelo - </option>');
-				}
-			});
-		});
-    </script>
+   
 </body>
 </html>
