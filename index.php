@@ -56,28 +56,28 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label >MARCA</label>
-                <select id="marca" class="form-control" name="marca">
-                    <option selected>Escolha...</option>      
+                
+                <select class="form-control" name="select_marca" id="id_marca">
+                    <option selected>Escolha...</option>    
+
                     <!-- Traz a opção de carros que está no Banco de dados Locadora -->
                     <?php
-                        $result_marcas = "SELECT DISTINCT marca FROM descricao_veiculo";
+                        $result_marcas = "SELECT * FROM  marca_veiculos";
                         $resultado_marcas = mysqli_query($conexao, $result_marcas);                       
 
                         while($row_marcas = mysqli_fetch_assoc($resultado_marcas) ) {
-                            echo '<option value="'.$row_marcas['id'].'">'.$row_marcas['marca'].'</option>';
+                            echo '<option value="'.$row_marcas['id'].'">'.$row_marcas['nome_veiculos'].'</option>';
                         }          
                     
-                    ?>                    
+                    ?>      
                 </select>
             </div>
+             <!-- Traz a opção de modelos que está no Banco de dados Locadora -->
             <div class="form-group col-md-4">
                 <label>MODELO</label>
                 <span class="carregando">Carredando...</span>
-                <span class="carregando">Carredando...</span>
-                <select id="modelo" class="form-control" name="modelo">
-                    <option selected>Escolha...</option>
-                   
-                  
+                <select class="form-control modelo" name="select_modelo" id="id_modelo">
+                    <option selected>Escolha...</option>   
                 </select>
             </div>
 
@@ -120,22 +120,15 @@
         <button type="submit" class="btn btn-secondary float-right">RESERVAR</button>
         <br><br>
     </form>
-
-    <script type='text/javascript'>
-			/*
-				$("select[name='modelo']").change(function(){
-					let $cor = $("input[name='cor']");
-					let $placa = $("input[name='placa']");
-					$.getJSON('function.php',{ 
-						modelo: $( this ).val() 
-					},function( json ){
-						$cor.val( json.cor );
-						$placa.val( json.placa );
-					});
-				});
-		*/
-		</script>
-    
+            <script type="text/javascript">
+               $(document).ready(function(){
+                $('#id_marca').change(function(){
+                    $('#id_modelo').load("modelos.php?select_marca="+$('#id_marca').val());
+                        
+                });
+            });
+            </script>
+      
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
