@@ -1,20 +1,18 @@
 <?php
+include "conexao.php";
 
- include "index.php";
- include "conexao.php";
+$marca = $_GET["marca"];
 
- $marca = $_REQUEST["select_marca"];
-
-$result = "SELECT *
-    FROM descricao_veiculo 
-    WHERE marca_id = $marca 
-    ORDER BY modelo";
-
-$resultado = mysqli_query($conexao, $result);
-while ($row = mysqli_fetch_assoc($resultado) ) {
-    $modelos[] = array(
-        "id"	=> $row["id"],
-        "modelo" => utf8_encode($row["modelo"]),
-    );
+$sqlBusca = "SELECT * FROM descricao_veiculo WHERE marca_id = " . $marca;
+$resultado = mysqli_query($conexao , $sqlBusca);
+$listaModelos = [];
+while($modelo = mysqli_fetch_assoc($resultado)){
+    $listaModelos[] = $modelo;
 }
 ?>
+<?php foreach($listaModelos as $modelo): ?>
+    <option value="<?php echo $modelo['id']; ?>"><?php echo $modelo['modelo']; ?></option>
+<?php endforeach; ?>
+ 
+	
+

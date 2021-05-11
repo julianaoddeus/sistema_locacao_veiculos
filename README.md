@@ -1,16 +1,34 @@
-# Sistema de locação de veículos em php
-
-
-Este projeto tem o intuito de criar um sistema onde será fornecido
-opções de carros para que o cliente escolhe o veículo para locação.
-Irá trazer informações do banco de dados e gerar um relatório ao final com informações
-do cliente e do veículo escolhido.
-
-# Tecnologias usadas no projeto 
-PHP
-MYSQL
-HTML
-CSS
-BOOTSTRAP
-SQL
-JAVASCRIPT
+# App Locação de veículos
+## Descrição
+Aplicativo web para controlar o aluguel de carros de uma empresa de locação de veículos. 
+O sistema terá os módulos de:
+- Cadastro de clientes
+    - Inclusão
+    --nome
+    --telefone
+    --habilitação/categoria
+    
+- Cadastro de veículos
+    - Inclusão
+    - Alteração
+    - Exclusão
+    - Listagem de todos os modelos
+    --cor
+    --placa
+    --Km
+    --valor do aluguel de
+    
+- Cadastro de agenda
+    - Agendamento de locação
+    
+## Tecnologias (Stack)
+- Apache (XAMPP)
+- PHP
+- MariaDB
+- HTML
+- CSS
+- Javascript
+- jQuery
+- Bootstrap
+### SQL -  Banco de dados
+### Criação do banco de dados

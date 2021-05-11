@@ -1,6 +1,3 @@
-<?php
-    include "conexao.php"
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,12 +14,6 @@
             background-color: #222;
             color: #fff;
         }
-
-        .carregando {
-            color: #ff0000;
-            display: none;
-        }
-
     </style>
 
   </head>
@@ -31,7 +22,7 @@
        <div class="text-center">
        <img src="images/logo.png" class="img-fluid" alt="Responsive image">
        </div>
-    <form action="cliente.php" method="POST">
+       <form>
         <!-- Informações do Cliente -->
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -55,30 +46,30 @@
         <!-- Informações do Veículo -->
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label >MARCA</label>
-                
-                <select class="form-control" name="select_marca" id="id_marca">
-                    <option selected>Escolha...</option>    
-
-                    <!-- Traz a opção de carros que está no Banco de dados Locadora -->
-                    <?php
-                        $result_marcas = "SELECT * FROM  marca_veiculos";
-                        $resultado_marcas = mysqli_query($conexao, $result_marcas);                       
-
-                        while($row_marcas = mysqli_fetch_assoc($resultado_marcas) ) {
-                            echo '<option value="'.$row_marcas['id'].'">'.$row_marcas['nome_veiculos'].'</option>';
-                        }          
+                <label >MARCA</label> 
+                <?php
+                    include "conexao.php";
+                    $sqlBusca = "SELECT * FROM marca_veiculos";
+                    $resultado = mysqli_query($conexao , $sqlBusca);
+                    $listaMarcas = [];
+                    while($marca = mysqli_fetch_assoc($resultado)){
+                        $listaMarcas[] = $marca;
+                    }
+                    ?>
                     
-                    ?>      
-                </select>
+                    <select class="form-control" id="marca" name="marca" onchange="ConsultarModelos();">
+                        <option selected>Escolha...</option>
+                        <?php foreach($listaMarcas as $marca): ?>
+                            <option value="<?php echo $marca['id']; ?>"><?php echo $marca['nome_veiculos']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    
+                   
             </div>
              <!-- Traz a opção de modelos que está no Banco de dados Locadora -->
             <div class="form-group col-md-4">
                 <label>MODELO</label>
-                <span class="carregando">Carredando...</span>
-                <select class="form-control modelo" name="select_modelo" id="id_modelo">
-                    <option selected>Escolha...</option>   
-                </select>
+                <select class="form-control" id="modelo" name="modelo"></select>
             </div>
 
             <div class="form-group col-md-2">
@@ -120,19 +111,11 @@
         <button type="submit" class="btn btn-secondary float-right">RESERVAR</button>
         <br><br>
     </form>
-            <script type="text/javascript">
-               $(document).ready(function(){
-                $('#id_marca').change(function(){
-                    $('#id_modelo').load("modelos.php?select_marca="+$('#id_marca').val());
-                        
-                });
-            });
-            </script>
-      
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+           
+    <script src="js/jquery.js"></script>
+    <script src="js/funcoes.js"></script>
+  
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
    
 </body>
