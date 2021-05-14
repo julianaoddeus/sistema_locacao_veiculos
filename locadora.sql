@@ -31,7 +31,8 @@ CREATE TABLE `descricao_veiculo` (
   `km` INT NOT NULL,
   `placa` varchar(20) NOT NULL,
   `valor_do_aluguel` INT NOT NULL,
-  `marca_id` INT NOT NULL  
+  `marca_id` INT NOT NULL,
+   PRIMARY KEY (`id`)  
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- Inserindo dados da tabela `descricao_veiculo`

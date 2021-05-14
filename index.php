@@ -1,3 +1,4 @@
+<?php include "conexao.php";?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,7 +21,7 @@
 <body>        
    <div class="container">
        <div class="text-center">
-       <img src="images/logo.png" class="img-fluid" alt="Responsive image">
+       <img src="images/icones/logo.png" class="img-fluid" alt="Responsive image">
        </div>
        <form>
         <!-- Informações do Cliente -->
@@ -48,9 +49,10 @@
             <div class="form-group col-md-4">
                 <label >MARCA</label> 
                 <?php
-                    include "conexao.php";
+                    
                     $sqlBusca = "SELECT * FROM marca_veiculos";
                     $resultado = mysqli_query($conexao , $sqlBusca);
+                    
                     $listaMarcas = [];
                     while($marca = mysqli_fetch_assoc($resultado)){
                         $listaMarcas[] = $marca;
@@ -110,12 +112,27 @@
         </div>
         <button type="submit" class="btn btn-secondary float-right">RESERVAR</button>
         <br><br>
-    </form>
-
-           
+    </form> 
     <script src="js/jquery.js"></script>
     <script src="js/funcoes.js"></script>
-  
+    <script type='text/javascript'>
+			
+			$(document).ready(function(){
+				$("select[name='modelo']").change(function(){
+					var $cor = $("input[name='cor']");
+					var $placa = $("input[name='placa']");
+					$.getJSON('function.php',{ 
+						modelo: $( this ).val() 
+					},function( json ){
+						$cor.val( json.cor );
+						$placa.val( json.placa );
+					});
+				});
+			});
+		
+		</script>
+   
+    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
    
 </body>
