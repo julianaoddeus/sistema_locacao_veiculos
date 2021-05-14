@@ -23,20 +23,20 @@
        <div class="text-center">
        <img src="images/icones/logo.png" class="img-fluid" alt="Responsive image">
        </div>
-       <form>
+       <form method="post" action="locacao.php">
         <!-- Informações do Cliente -->
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="cliente">NOME</label>
-                <input type="nome" class="form-control" id="inputNome" required name="nomeCliente">
+                <input type="nome" class="form-control" id="inputNome" required name="nome">
             </div>
             <div class="form-group col-md-4">
                 <label for="cliente">TELEFONE</label>
-                <input type="text" class="form-control" id="tel" name="telCliente" >
+                <input type="text" class="form-control" id="tel" name="telefone" >
             </div>
             <div class="form-group col-md-2">
                 <label for="cliente">HABILITAÇÃO</label>
-                <select id="cor" class="form-control" name="habilitacaoCliente">
+                <select id="cor" class="form-control" name="habilitacao">
                         <option selected>Categoria</option>
                         <option>A</option>
                         <option>B</option>
@@ -71,7 +71,7 @@
              <!-- Traz a opção de modelos que está no Banco de dados Locadora -->
             <div class="form-group col-md-4">
                 <label>MODELO</label>
-                <select class="form-control" id="modelo" name="modelo"></select>
+                <select class="form-control" id="modelo" name="modelo" ></select>
             </div>
 
             <div class="form-group col-md-2">
@@ -102,11 +102,11 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="reserva">DATA DA ENTREGA</label>
-                <input type="date" name="dataE" id="dataE" class="form-control">
+                <input type="date" name="dataEntrada" id="dataEntrada" class="form-control">
             </div>
             <div class="form-group col-md-4">
                 <label for="reserva">DATA DA SAÍDA</label>
-                <input type="date" name="dataS" id="dataS" class="form-control">
+                <input type="date" name="dataSaida"  id="dataSaida" class="form-control">
             </div>
             
         </div>
@@ -132,8 +132,38 @@
 		
 		</script>
    
+   <script src="bootstrap/js/bootstrap.bundle.js"></script>
+<?php
+
+$sqlBusca = "SELECT * FROM detalhes_locacao LIMIT 1"; //
+$resultado_busca = mysqli_query($conexao, $sqlBusca);
+
+?>
+
+<table class="table table-hover">
+<tr>
     
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <th>NOME</th>
+    <th>TELEFONE</th>
+    <th>HABILITAÇÃO</th>
+    <th>DATA ENTRADA</th>
+    <th>DATA SAÍDA</th>
+</tr>
+
+<?php 
+while($row_busca = mysqli_fetch_assoc($resultado_busca)){
+    echo "<tr>";
+    
+    echo "<td>{$row_busca['nome']}</td>";
+    echo "<td>{$row_busca['telefone']}</td>";
+    echo "<td>{$row_busca['habilitacao']}</td>";
+    echo "<td>{$row_busca['dataEntrada']}</td>";
+    echo "<td>{$row_busca['dataSaida']}</td>";
+    echo "<tr>";
+}
+?>
+
+</table>
    
 </body>
 </html>
