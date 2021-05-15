@@ -92,13 +92,10 @@
                 <label>KM ATUAL</label>
                 <input type="text" class="form-control" id="km" name="km">
             </div>
-            <div class="input-group col-md-2"> 
+            <div class=" col-md-2"> 
                 <label>VALOR</label>
                 <input type="text" class="form-control" id="valor" name="valor">
-                    <div class="input-group-append">
-                    
-                        <span class="input-group-text">0.00</span>
-                    </div>
+                   
             </div>
             
         </div>
