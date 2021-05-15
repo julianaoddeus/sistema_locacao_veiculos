@@ -81,20 +81,24 @@
         </div> 
         <div class="form-row">
             <div class="form-group col-md-3">
-                <label for="carro">PLACA</label>
+                <label>PLACA</label>
                 <input type="text" class="form-control" id="placa" name="placa">
             </div>
             <div class="form-group col-md-3">
-                <label for="carro">ANO</label>
+                <label>ANO</label>
                 <input type="text" class="form-control" id="ano" name="ano">
             </div>
             <div class="form-group col-md-2">
-                <label for="carro">KM ATUAL</label>
+                <label>KM ATUAL</label>
                 <input type="text" class="form-control" id="km" name="km">
             </div>
-            <div class="form-group col-md-2">
-                <label for="reserva">VALOR</label>
-                <input type="text" class="form-control" id="valor" placeholder="R$" name="valor">
+            <div class="input-group col-md-2"> 
+                <label>VALOR</label>
+                <input type="text" class="form-control" id="valor" name="valor">
+                    <div class="input-group-append">
+                    
+                        <span class="input-group-text">0.00</span>
+                    </div>
             </div>
             
         </div>
@@ -118,52 +122,37 @@
     <script type='text/javascript'>
 			
 			$(document).ready(function(){
-				$("select[name='modelo']").change(function(){
-					var $cor = $("input[name='cor']");
-					var $placa = $("input[name='placa']");
-					$.getJSON('function.php',{ 
-						modelo: $( this ).val() 
-					},function( json ){
-						$cor.val( json.cor );
+				$("#modelo").change(function(){
+                    
+					let $cor = $("input[name='cor']");
+					let $placa = $("input[name='placa']");
+                    let $ano = $("input[name='ano']");
+					let $km = $("input[name='km']");
+                    let $valor = $("input[name='valor']");
+                    
+					$.ajax({
+                        dataType: "json",
+                        url: "function.php",
+                        data: {
+                            modelo: $(this).val()
+                        }
+                    } )
+                    .done(function(json){
+                        $cor.val( json.cor );
 						$placa.val( json.placa );
-					});
+                        $ano.val( json.ano );
+						$km.val( json.km );
+                        $valor.val( json.valor );
+						
+                    })
+					
 				});
 			});
 		
 		</script>
    
    <script src="bootstrap/js/bootstrap.bundle.js"></script>
-<?php
-
-$sqlBusca = "SELECT * FROM detalhes_locacao LIMIT 1"; //
-$resultado_busca = mysqli_query($conexao, $sqlBusca);
-
-?>
-
-<table class="table table-hover">
-<tr>
-    
-    <th>NOME</th>
-    <th>TELEFONE</th>
-    <th>HABILITAÇÃO</th>
-    <th>DATA ENTRADA</th>
-    <th>DATA SAÍDA</th>
-</tr>
-
-<?php 
-while($row_busca = mysqli_fetch_assoc($resultado_busca)){
-    echo "<tr>";
-    
-    echo "<td>{$row_busca['nome']}</td>";
-    echo "<td>{$row_busca['telefone']}</td>";
-    echo "<td>{$row_busca['habilitacao']}</td>";
-    echo "<td>{$row_busca['dataEntrada']}</td>";
-    echo "<td>{$row_busca['dataSaida']}</td>";
-    echo "<tr>";
-}
-?>
-
-</table>
+   
    
 </body>
 </html>

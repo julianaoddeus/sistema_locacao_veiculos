@@ -13,7 +13,7 @@ while($modelo = mysqli_fetch_assoc($resultado)){
 }
 ?>
 <?php foreach($listaModelos as $modelo): ?>
-    <option value="<?php echo $modelo['id']; ?>"><?php echo $modelo['modelo']; ?></option>
+    <option value="<?php echo $modelo['modelo']; ?>"><?php echo $modelo['modelo']; ?></option>
     
 <?php endforeach; ?>
  
