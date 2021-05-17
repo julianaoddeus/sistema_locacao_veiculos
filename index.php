@@ -38,7 +38,7 @@
                 <label for="cliente">HABILITAÇÃO</label>
                 <select id="cor" class="form-control" name="habilitacao">
                         <option selected>Categoria</option>
-                        <option>A</option>
+                       
                         <option>B</option>
                         <option>AB</option>
                 </select>
@@ -62,7 +62,7 @@
                     <select class="form-control" id="marca" name="marca" onchange="ConsultarModelos();">
                         <option selected>Escolha...</option>
                         <?php foreach($listaMarcas as $marca): ?>
-                            <option value="<?php echo $marca['id']; ?>"><?php echo $marca['nome_veiculos']; ?></option>
+                            <option value="<?php echo $marca['id']; ?>"><?php echo $marca['nome']; ?></option>
                         <?php endforeach; ?>
                     </select>
                     

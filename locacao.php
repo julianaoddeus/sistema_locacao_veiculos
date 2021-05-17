@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <?php
 $nome = $_POST['nome'];
 $telefone = $_POST['telefone'];
@@ -23,8 +24,8 @@ $sqlInserir = "INSERT INTO detalhes_locacao(nome, telefone, habilitacao, dataEnt
 $resultado = mysqli_query($conexao, $sqlInserir);
 
 if($resultado){
-    echo "<Inserido com sucesso!<br>";
-    echo "<a href='index.php'>VOLTAR</a><br>";
+    echo "<Inserido com sucesso!<br><br>";
+    echo "<a href='index.php' class='btn btn-danger'>VOLTAR</a><br><br>";
 }else{
     echo "Algum erro aconteceu";
 }
