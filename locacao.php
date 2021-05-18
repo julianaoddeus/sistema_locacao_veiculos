@@ -40,7 +40,7 @@ if($resultado){
 
 
 
-    $sqlBusca = "SELECT l.nome, l.telefone, l.habilitacao, l.dataEntrada, l.dataSaida, m.marca, v.modelo, v.cor, v.ano, v.km, v.placa, v.valor FROM detalhes_locacao l JOIN marca_veiculos  m ON l.fk_marca = m.id JOIN descricao_veiculo v ON l.fk_modelo = v.modelo"; //
+    $sqlBusca = "SELECT l.nome, l.telefone, l.habilitacao, l.dataEntrada, l.dataSaida, m.marca, v.modelo, v.cor, v.ano, v.km, v.placa, v.valor FROM detalhes_locacao l JOIN marca_veiculos  m ON l.fk_marca = m.id JOIN descricao_veiculo v ON l.fk_modelo = v.modelo ORDER BY l.nome"; //
     
     $resultado_busca = mysqli_query($conexao, $sqlBusca);
 
