@@ -62,7 +62,7 @@
                     <select class="form-control" id="marca" name="marca" onchange="ConsultarModelos();">
                         <option selected>Escolha...</option>
                         <?php foreach($listaMarcas as $marca): ?>
-                            <option value="<?php echo $marca['id']; ?>"><?php echo $marca['nome']; ?></option>
+                            <option value="<?php echo $marca['id']; ?>"><?php echo $marca['marca']; ?></option>
                         <?php endforeach; ?>
                     </select>
                     
